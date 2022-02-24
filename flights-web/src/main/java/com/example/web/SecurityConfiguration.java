@@ -14,6 +14,9 @@ public class SecurityConfiguration {
 	SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 		// @formatter:off
 		http
+			.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
+					.pathMatchers("/app/**", "/*.*.js", "/*.*.css", "/assets/**")
+					.permitAll())
 			.authorizeExchange((authorize) -> authorize
 				.anyExchange().authenticated()
 			)
